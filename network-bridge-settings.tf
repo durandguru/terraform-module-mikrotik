@@ -1,0 +1,8 @@
+resource "routeros_bridge" "bridge" {
+  name              = var.shared_settings.bridge_name
+  ingress_filtering = true
+  protocol_mode     = "none"
+  priority          = var.device_settings.bridge_priority
+  igmp_snooping     = false
+  vlan_filtering    = true
+}
