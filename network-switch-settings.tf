@@ -20,5 +20,5 @@ resource "routeros_interface_ethernet_switch_vlan" "vlan" {
   if v.vlan_if && var.device_settings.vlan_mode == "switch" }
   switch  = "switch1"
   ports   = ["ether1", "switch1-cpu"]
-  vlan_id = v.vlan_id
+  vlan_id = each.value.vlan_id
 }
