@@ -15,7 +15,7 @@ resource "routeros_interface_ethernet_switch" "switch1" {
 resource "routeros_interface_ethernet_switch_port" "switchport" {
   for_each = {
     for k, v in var.device_network_settings.ports : k => v
-  if each.key == "sfp1" && var.device_settings.vlan_mode == "switch" }
+  if k.key == "ether1" && var.device_settings.vlan_mode == "switch" }
   name            = each.key
   vlan_mode       = "secure"
   vlan_header     = "leave-as-is"
