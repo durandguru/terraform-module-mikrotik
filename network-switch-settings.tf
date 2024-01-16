@@ -18,7 +18,7 @@ resource "routeros_interface_ethernet_switch_vlan" "vlan" {
     for_each = {
     for k, v in var.device_network_settings.vlans : k => v
   if v.vlan_if && var.device_settings.vlan_mode == "switch" }
-  switch  = routeros_interface_ethernet_switch.switch1.name
+  switch  = "switch1"
   ports   = ["ether1", "switch1-cpu"]
-  vlan_id = 99
+  vlan_id = v.vlan_id
 }
