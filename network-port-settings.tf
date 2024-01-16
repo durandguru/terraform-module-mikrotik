@@ -3,8 +3,8 @@ resource "routeros_bridge_port" "bridgeport" {
   bridge            = var.shared_settings.bridge_name
   interface         = each.key
   pvid              = each.value.vlan
-  ingress_filtering = true
-  frame_types       = each.value.type
+  ingress_filtering = var.device_settings.vlan_mode == "bridge" ? true : false
+  frame_types       = var.device_settings.vlan_mode == "bridge" ? each.value.type : "admit-all"
   hw                = true
-  fast_leave        = true
+  fast_leave        = var.device_settings.vlan_mode == "bridge" ? true : false
 }
