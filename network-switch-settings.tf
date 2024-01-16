@@ -4,20 +4,20 @@ resource "routeros_interface_ethernet_switch" "switch1" {
   cpu_flow_control = true
 }
 
-resource "routeros_interface_ethernet_switch_port" "switchport" {
-  for_each        = var.device_network_settings.ports
-  name            = each.key
-  vlan_mode       = "secure"
-  vlan_header     = "leave-as-is"
-  default_vlan_id = each.value.vlan == "1" ? "auto" : each.value.vlan
-}
-
 # resource "routeros_interface_ethernet_switch_port" "switchport" {
-#   for_each = {
-#     for k, v in var.device_network_settings.ports : k => v
-#   if k.key == "ether1" && var.device_settings.vlan_mode == "switch" }
+#   for_each        = var.device_network_settings.ports
 #   name            = each.key
 #   vlan_mode       = "secure"
 #   vlan_header     = "leave-as-is"
 #   default_vlan_id = each.value.vlan == "1" ? "auto" : each.value.vlan
 # }
+
+resource "routeros_interface_ethernet_switch_port" "switchport" {
+  for_each = {
+    for k, v in var.device_network_settings.ports : k => v
+  if v.switch == "yes" && var.device_settings.vlan_mode == "switch" }
+  name            = each.key
+  vlan_mode       = "secure"
+  vlan_header     = "leave-as-is"
+  default_vlan_id = each.value.vlan == "1" ? "auto" : each.value.vlan
+}
