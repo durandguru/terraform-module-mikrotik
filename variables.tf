@@ -29,7 +29,7 @@ variable "device_settings" {
     hosturl         = string
     username        = string
     device_type     = string
-    vlan-mode       = string
+    vlan_mode       = string
     environment     = string
     bridge_priority = string
     ipv6_enabled    = bool
@@ -39,7 +39,7 @@ variable "device_settings" {
     hosturl         = ""
     username        = ""
     device_type     = ""
-    vlan-mode       = ""
+    vlan_mode       = ""
     environment     = ""
     bridge_priority = ""
     ipv6_enabled    = "false"
