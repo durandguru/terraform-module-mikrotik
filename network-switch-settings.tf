@@ -1,5 +1,5 @@
 resource "routeros_interface_ethernet_switch" "switch1" {
-  count            = var.device_settings.vlan_mode == "bridge" ? 1 : 0
+  count            = var.device_settings.vlan_mode == "switch" ? 1 : 0
   name             = "switch1"
   cpu_flow_control = true
 }
