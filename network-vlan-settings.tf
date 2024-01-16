@@ -1,5 +1,7 @@
 resource "routeros_bridge_vlan" "vlan" {
-  for_each = var.device_network_settings.vlans
+  for_each = {
+    for k, v in var.device_network_settings.vlans : k => v
+  if v.vlan_if && var.device_settings.vlan_mode == "bridge" }
   bridge   = var.shared_settings.bridge_name
   tagged = compact(concat(
     split(",", replace(replace(contains(local.vlan_interfaces, each.value.vlan_id), "true", "bridge"), "false", "")),
