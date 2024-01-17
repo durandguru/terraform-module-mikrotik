@@ -1,4 +1,4 @@
-resource "routeros_bridge_vlan" "vlan" {
+resource "routeros_interface_bridge_vlan" "vlan" {
   for_each = {
     for k, v in var.device_network_settings.vlans : k => v
   if v.vlan_if && var.device_settings.vlan_mode == "bridge" }
@@ -11,7 +11,7 @@ resource "routeros_bridge_vlan" "vlan" {
   vlan_ids = each.value.vlan_id
 }
 
-resource "routeros_vlan" "vlan" {
+resource "routeros_interface_vlan" "vlan" {
   for_each = {
     for k, v in var.device_network_settings.vlans : k => v
   if v.vlan_if }
@@ -27,7 +27,7 @@ resource "routeros_ip_address" "vlan" {
   interface = each.value.vlan_name
   address   = each.value.vlan_address_v4
 
-  depends_on = [routeros_vlan.vlan]
+  depends_on = [routeros_interface_vlan.vlan]
 }
 
 resource "routeros_ipv6_address" "vlan" {
@@ -38,7 +38,7 @@ resource "routeros_ipv6_address" "vlan" {
   address   = each.value.vlan_address_v6
   advertise = var.device_settings.device_type == "router" ? true : false
 
-  depends_on = [routeros_vlan.vlan]
+  depends_on = [routeros_interface_vlan.vlan]
 }
 
 resource "routeros_interface_list_member" "list-lan" {
@@ -47,7 +47,7 @@ resource "routeros_interface_list_member" "list-lan" {
   if v.vlan_if && var.device_settings.device_type == "router" }
   interface  = each.value.vlan_name
   list       = "LAN"
-  depends_on = [routeros_vlan.vlan]
+  depends_on = [routeros_interface_vlan.vlan]
 }
 
 resource "routeros_interface_list_member" "list-mgmt" {
@@ -56,7 +56,7 @@ resource "routeros_interface_list_member" "list-mgmt" {
   if v.vlan_if && v.vlan_mgmt }
   interface  = each.value.vlan_name
   list       = "MGMT"
-  depends_on = [routeros_vlan.vlan]
+  depends_on = [routeros_interface_vlan.vlan]
 }
 
 resource "routeros_ip_pool" "vlan-ip-pool" {
@@ -69,7 +69,7 @@ resource "routeros_ip_pool" "vlan-ip-pool" {
   depends_on = [routeros_ip_address.vlan]
 }
 
-resource "routeros_dhcp_server_network" "vlan-dhcp-network" {
+resource "routeros_ip_dhcp_server_network" "vlan-dhcp-network" {
   for_each = {
     for k, v in var.device_network_settings.vlans : k => v
   if v.dhcp_server }
@@ -81,7 +81,7 @@ resource "routeros_dhcp_server_network" "vlan-dhcp-network" {
   depends_on = [routeros_ip_pool.vlan-ip-pool]
 }
 
-resource "routeros_dhcp_server" "vlan-dhcp-server" {
+resource "routeros_ip_dhcp_server" "vlan-dhcp-server" {
   for_each = {
     for k, v in var.device_network_settings.vlans : k => v
   if v.dhcp_server }
@@ -92,10 +92,10 @@ resource "routeros_dhcp_server" "vlan-dhcp-server" {
   authoritative = "yes"
   lease_time    = each.value.dhcp_leasetime
 
-  depends_on = [routeros_dhcp_server_network.vlan-dhcp-network]
+  depends_on = [routeros_ip_dhcp_server_network.vlan-dhcp-network]
 }
 
-resource "routeros_dns_record" "vlan-dns-rt-a-record" {
+resource "routeros_ip_dns_record" "vlan-dns-rt-a-record" {
   for_each = {
     for k, v in var.device_network_settings.vlans : k => v
   if v.vlan_if && var.device_settings.device_type == "router" }
@@ -104,7 +104,7 @@ resource "routeros_dns_record" "vlan-dns-rt-a-record" {
   name    = each.value.vlan_mgmt ? var.device_settings.identity : "rt-${each.value.vlan_id}.${var.shared_settings.dns_domain}"
 }
 
-resource "routeros_dns_record" "vlan-dns-rt-aaaa-record" {
+resource "routeros_ip_dns_record" "vlan-dns-rt-aaaa-record" {
   for_each = {
     for k, v in var.device_network_settings.vlans : k => v
   if v.vlan_if && v.vlan_ipv6 && var.device_settings.device_type == "router" }

@@ -1,4 +1,4 @@
-resource "routeros_bridge_port" "bridgeport" {
+resource "routeros_interface_bridge_port" "bridgeport" {
   for_each          = var.device_network_settings.ports
   bridge            = var.shared_settings.bridge_name
   interface         = each.key

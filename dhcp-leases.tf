@@ -8,7 +8,7 @@ resource "routeros_ip_dhcp_server_lease" "dhcp-lease" {
   comment     = each.value.comment
 }
 
-resource "routeros_dns_record" "dhcp-dns-record" {
+resource "routeros_ip_dns_record" "dhcp-dns-record" {
   for_each = {
     for k, v in var.environment_network_settings.dhcp-leases : k => v
   if v.dns && var.device_settings.device_type == "router" }
