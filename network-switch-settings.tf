@@ -31,5 +31,5 @@ resource "routeros_interface_ethernet_switch_vlan" "vlan" {
     local.trunk_ports,
     keys({ for k, v in local.hybrid_ports_untagged : k => v if v.vlan != each.value.vlan_id })
   ))
-  vlan_ids = each.value.vlan_id
+  vlan_id = each.value.vlan_id
 }
