@@ -29,7 +29,7 @@ resource "routeros_interface_ethernet_switch_vlan" "vlan" {
   ports = compact(concat(
     split(",", replace(replace(contains(local.vlan_interfaces, each.value.vlan_id), "true", "switch1-cpu"), "false", "")),
     local.trunk_ports,
-    keys({ for k, v in local.hybrid_ports_untagged : k => v if v.vlan != each.value.vlan_id })
+    local.untagged_ports
   ))
   vlan_id = each.value.vlan_id
 }
