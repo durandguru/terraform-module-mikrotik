@@ -14,15 +14,6 @@ resource "routeros_interface_ethernet_switch_port" "switchport" {
   default_vlan_id = each.value.vlan == "1" ? "auto" : each.value.vlan
 }
 
-# resource "routeros_interface_ethernet_switch_vlan" "vlan" {
-#   for_each = {
-#     for k, v in var.device_network_settings.vlans : k => v
-#   if v.vlan_if && var.device_settings.vlan_mode == "switch" }
-#   switch  = "switch1"
-#   ports   = ["ether1", "switch1-cpu"]
-#   vlan_id = each.value.vlan_id
-# }
-
 resource "routeros_interface_ethernet_switch_vlan" "vlan" {
   for_each = var.device_network_settings.vlans
   switch = "switch1"
