@@ -6,6 +6,8 @@ resource "routeros_ip_dhcp_server_lease" "dhcp-lease" {
   mac_address = each.value.mac_address
   server      = each.value.dhcp_server
   comment     = each.value.comment
+
+  depends_on = [routeros_ip_dhcp_server.vlan-dhcp-server]
 }
 
 resource "routeros_ip_dns_record" "dhcp-dns-record" {
@@ -15,4 +17,6 @@ resource "routeros_ip_dns_record" "dhcp-dns-record" {
   type    = "A"
   address = each.value.ip_address
   name    = each.value.dns_name
+
+  depends_on = [routeros_ip_dhcp_server_lease.dhcp-lease]
 }
