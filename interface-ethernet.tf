@@ -4,5 +4,5 @@ resource "routeros_interface_ethernet" "interface" {
   if v.poe != null }
   factory_name = each.key
   name         = each.key
-  poe_out      = each.value.vlan
+  poe_out      = each.value.poe
 }
