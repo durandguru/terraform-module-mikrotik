@@ -46,8 +46,29 @@ variable "device_settings" {
   }
 }
 
-variable "device_network_settings" {
+variable "device_network_settings2" {
   default = {}
+}
+
+variable "device_network_settings" {
+  type = map(object({
+    ports = list(
+      object({
+        vlan   = string
+        type   = string
+        switch = string
+        poe    = string
+    })),
+    vlans = list(
+      object({
+        vlan_id         = string
+        vlan_if         = bool
+        vlan_ipv6       = bool
+        vlan_name       = string
+        vlan_address_v4 = string
+        vlan_mgmt       = bool
+        dhcp_server     = bool
+  })) }))
 }
 
 variable "environment_network_settings" {
