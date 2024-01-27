@@ -5,7 +5,7 @@ locals {
 
   trunk_ports_switch = keys({
     for k, v in var.device_network_settings.ports : k => v
-  if v.type == "admit-only-vlan-tagged" && v.switch != "no" })
+  if v.type == "admit-only-vlan-tagged" && can(v.switch) })
 
   hybrid_ports_untagged = {
     for k, v in var.device_network_settings.ports : k => v
