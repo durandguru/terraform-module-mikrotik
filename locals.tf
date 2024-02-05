@@ -18,4 +18,8 @@ locals {
   vlan_interfaces = keys({
     for k, v in var.device_network_settings.vlans : k => v
   if v.vlan_if })
+
+  dynamic_ports = {
+    for k, v in var.device_network_settings.dynamicports : k => v
+  if v.type == "admit-all" }
 }

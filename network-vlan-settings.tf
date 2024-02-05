@@ -6,7 +6,8 @@ resource "routeros_interface_bridge_vlan" "vlan" {
   tagged = compact(concat(
     split(",", replace(replace(contains(local.vlan_interfaces, each.value.vlan_id), "true", "bridge"), "false", "")),
     local.trunk_ports,
-    keys({ for k, v in local.hybrid_ports_untagged : k => v if v.vlan != each.value.vlan_id })
+    keys({ for k, v in local.hybrid_ports_untagged : k => v if v.vlan != each.value.vlan_id }),
+    local.dynamic_ports
   ))
   vlan_ids = each.value.vlan_id
 }
