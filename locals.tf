@@ -19,7 +19,7 @@ locals {
     for k, v in var.device_network_settings.vlans : k => v
   if v.vlan_if })
 
-  dynamic_ports = can(var.device_network_settings.dynamicports,keys({
+  dynamic_ports = keys({
     for k, v in var.device_network_settings.dynamicports : k => v
-  if v.type == "admit-all" && var.device_settings.device_type == "sector-ap" }))
+  if v.type == "admit-all" && var.device_settings.device_type == "sector-ap" })
 }
