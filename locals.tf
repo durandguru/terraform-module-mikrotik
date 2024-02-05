@@ -19,7 +19,7 @@ locals {
     for k, v in var.device_network_settings.vlans : k => v
   if v.vlan_if })
 
-  dynamic_ports = {
+  dynamic_ports = keys({
     for k, v in var.device_network_settings.dynamicports : k => v
-  if v.type == "admit-all" }
+  if v.type == "admit-all" })
 }
