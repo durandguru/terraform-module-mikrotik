@@ -9,6 +9,7 @@ variable "shared_settings" {
     bridge_name        = string
     snmp_location      = string
     snmp_contact       = string
+    ntp_servers        = string
   })
   default = {
     dns_server         = ""
@@ -20,6 +21,7 @@ variable "shared_settings" {
     bridge_name        = ""
     snmp_location      = ""
     snmp_contact       = ""
+    ntp_servers        = ""
   }
 }
 
