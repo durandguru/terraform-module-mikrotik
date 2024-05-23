@@ -7,12 +7,12 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      day: "sunday"
+      day: "wednesday"
       interval: "weekly"
       time: "04:47"
   - package-ecosystem: "terraform"
     directory: "/"
     schedule:
-      day: "sunday"
+      day: "thursday"
       interval: "weekly"
       time: "05:47"
