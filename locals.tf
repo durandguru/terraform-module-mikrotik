@@ -23,7 +23,7 @@ locals {
     for k, v in var.device_network_settings.dynamicports : k => v
   if v.type == "admit-all" && var.device_settings.device_type == "sector-ap" })
 
-  ip = trim(trim("${var.device_settings.hosturl}", ":443"), "https://")
+  ip = trimprefix(trimsuffix("${var.device_settings.hosturl}", ":443"), "https://")
 
   caname-1 = title(split(".", var.device_settings.identity)[1])
 
