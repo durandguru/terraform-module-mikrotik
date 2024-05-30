@@ -35,6 +35,7 @@ variable "device_settings" {
     environment     = string
     bridge_priority = string
     ipv6_enabled    = bool
+    root_ca         = bool
   })
   default = {
     identity        = ""
@@ -45,12 +46,12 @@ variable "device_settings" {
     environment     = ""
     bridge_priority = ""
     ipv6_enabled    = "false"
+    root_ca         = false
   }
 }
 
 variable "cert_settings" {
   type = object({
-    root         = bool
     country      = string
     state        = string
     locality     = string
@@ -60,7 +61,6 @@ variable "cert_settings" {
     scep_url     = string
   })
   default = {
-    root         = "false"
     country      = "NL"
     state        = ""
     locality     = ""
