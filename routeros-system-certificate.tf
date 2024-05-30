@@ -22,7 +22,7 @@ resource "routeros_system_certificate_scep_server" "scep-90-days" {
   path       = "/scep/90"
   days_valid = 90
 
-  depends_on = [routeros_system_certificate.root_ca]
+  depends_on = [routeros_system_certificate.root_ca[0]]
 }
 
 resource "routeros_system_certificate_scep_server" "scep-365-days" {
@@ -31,7 +31,7 @@ resource "routeros_system_certificate_scep_server" "scep-365-days" {
   path       = "/scep/365"
   days_valid = 365
 
-  depends_on = [routeros_system_certificate.root_ca]
+  depends_on = [routeros_system_certificate.root_ca[0]]
 }
 
 resource "routeros_system_certificate" "scep_client" {
