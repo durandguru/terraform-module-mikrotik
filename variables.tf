@@ -50,7 +50,7 @@ variable "device_settings" {
 
 variable "cert_settings" {
   type = object({
-    type         = string
+    root         = bool
     country      = string
     state        = string
     locality     = string
@@ -60,7 +60,7 @@ variable "cert_settings" {
     scep_url     = string
   })
   default = {
-    type         = ""
+    root         = "false"
     country      = "NL"
     state        = ""
     locality     = ""

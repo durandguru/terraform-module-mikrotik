@@ -1,5 +1,5 @@
 resource "routeros_system_certificate" "root_ca" {
-  count        = var.cert_settings.type == "root" ? 1 : 0
+  count        = var.cert_settings.root ? 1 : 0
   name         = "Atletiekunie-ES-CA"
   common_name  = "Atletiekunie.ES Root CA"
   key_usage    = ["key-cert-sign", "crl-sign"]
