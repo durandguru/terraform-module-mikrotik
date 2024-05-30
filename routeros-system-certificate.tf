@@ -3,13 +3,13 @@ resource "routeros_system_certificate" "root_ca" {
   common_name  = "Atletiekunie.ES Root CA"
   key_usage    = ["key-cert-sign", "crl-sign"]
   trusted      = true
-  country      = "NL"
-  locality     = "Apeldoorn"
-  organization = "Durand Guru"
-  state        = "Gelderland"
-  unit         = "Omnisport"
+  country      = var.cert_settings.country
+  state        = var.cert_settings.state
+  locality     = var.cert_settings.locality
+  organization = var.cert_settings.organization
+  unit         = var.cert_settings.unit
   days_valid   = "3650"
-  key_size     = "4096"
+  key_size     = var.cert_settings.key_size
   # Sign Root CA.
   sign {
   }
@@ -31,21 +31,21 @@ resource "routeros_system_certificate_scep_server" "scep-365-days" {
   depends_on = [routeros_system_certificate.root_ca]
 }
 
-# add name=sw06 common-name=sw06.durand.es country=NL state=UT locality=Utrecht organization="Durand Guru" unit=Events subject-alt-name=DNS:sw06.durand.es,IP:172.22.5.16
-
 resource "routeros_system_certificate" "scep_client" {
   name             = var.device_settings.identity
   common_name      = var.device_settings.identity
   subject_alt_name = "DNS:${var.device_settings.identity},IP:${local.ip}"
   key_usage        = ["digital-signature", "key-agreement", "tls-client"]
-  country          = "NL"
-  locality         = "Apeldoorn"
-  organization     = "Durand Guru"
-  state            = "Gelderland"
-  unit             = "Omnisport"
-  key_size         = "4096"
+  country          = var.cert_settings.country
+  state            = var.cert_settings.state
+  locality         = var.cert_settings.locality
+  organization     = var.cert_settings.organization
+  unit             = var.cert_settings.unit
+  key_size         = var.cert_settings.key_size
 
   sign_via_scep {
-    scep_url = "http://172.22.5.1/scep/90"
+    scep_url = var.cert_settings.scep_url
   }
+
+  depends_on = [routeros_system_certificate.root_ca]
 }

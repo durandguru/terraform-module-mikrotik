@@ -48,6 +48,29 @@ variable "device_settings" {
   }
 }
 
+variable "cert_settings" {
+  type = object({
+    root         = bool
+    country      = string
+    state        = string
+    locality     = string
+    organization = string
+    unit         = string
+    key_size     = string
+    scep_url     = string
+  })
+  default = {
+    root         = false
+    country      = "NL"
+    state        = ""
+    locality     = ""
+    organization = "Durand Guru"
+    unit         = ""
+    key_size     = "4096"
+    scep_url     = ""
+  }
+}
+
 variable "device_network_settings" {
   default = {}
 }
