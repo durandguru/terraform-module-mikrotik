@@ -36,7 +36,7 @@ resource "routeros_system_certificate_scep_server" "scep-365-days" {
 resource "routeros_system_certificate" "scep_client" {
   name             = var.device_settings.identity
   common_name      = var.device_settings.identity
-  subject_alt_name = "DNS:${var.device_settings.identity},IP:"
+  subject_alt_name = "DNS:${var.device_settings.identity},IP:trim(trim(${var.device_settings.hosturl},:443),https://)"
   key_usage        = ["digital-signature", "key-agreement", "tls-client"]
   country          = "NL"
   locality         = "Apeldoorn"
