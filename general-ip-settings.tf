@@ -29,3 +29,11 @@ resource "routeros_ip_service" "www" {
   port     = "80"
   disabled = var.device_settings.root_ca ? "false" : "true"
 }
+
+resource "routeros_ip_service" "www-ssl" {
+  numbers     = "www-ssl"
+  port        = "443"
+  disabled    = false
+  tls_version = "only v1.2"
+  certificate = routeros_system_certificate.scep_client.name
+}
