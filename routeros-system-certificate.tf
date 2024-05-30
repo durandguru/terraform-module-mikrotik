@@ -1,4 +1,5 @@
 resource "routeros_system_certificate" "root_ca" {
+  count        = var.cert_settings.root == true ? 1 : 0
   name         = "Atletiekunie-ES-CA"
   common_name  = "Atletiekunie.ES Root CA"
   key_usage    = ["key-cert-sign", "crl-sign"]
@@ -16,6 +17,7 @@ resource "routeros_system_certificate" "root_ca" {
 }
 
 resource "routeros_system_certificate_scep_server" "scep-90-days" {
+  count      = var.cert_settings.root == true ? 1 : 0
   ca_cert    = routeros_system_certificate.root_ca.name
   path       = "/scep/90"
   days_valid = 90
@@ -24,6 +26,7 @@ resource "routeros_system_certificate_scep_server" "scep-90-days" {
 }
 
 resource "routeros_system_certificate_scep_server" "scep-365-days" {
+  count      = var.cert_settings.root == true ? 1 : 0
   ca_cert    = routeros_system_certificate.root_ca.name
   path       = "/scep/365"
   days_valid = 365
