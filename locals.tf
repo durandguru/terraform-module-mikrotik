@@ -25,7 +25,7 @@ locals {
 
   ip = trim(trim("${var.device_settings.hosturl}", ":443"), "https://")
 
-  caname-1 = upper(split(".",var.device_settings.identity)[1])
+  caname-1 = title(split(".", var.device_settings.identity)[1])
 
-  caname-2 = upper(split(".",var.device_settings.identity)[2])
+  caname-2 = (split(".", var.device_settings.identity)[2])
 }
