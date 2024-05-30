@@ -1,7 +1,7 @@
 resource "routeros_system_certificate" "root_ca" {
   count        = var.device_settings.root_ca ? 1 : 0
-  name         = "Atletiekunie-ES-CA"
-  common_name  = "Atletiekunie.ES Root CA"
+  name         = "${local.caname-1}-${local.caname-2}-CA"
+  common_name  = "${local.caname-1}-${local.caname-2}-ROOT-CA"
   key_usage    = ["key-cert-sign", "crl-sign"]
   trusted      = true
   country      = var.cert_settings.country

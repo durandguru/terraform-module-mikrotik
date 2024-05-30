@@ -24,4 +24,8 @@ locals {
   if v.type == "admit-all" && var.device_settings.device_type == "sector-ap" })
 
   ip = trim(trim("${var.device_settings.hosturl}", ":443"), "https://")
+
+  caname-1 = upper(split(".",var.device_settings.identity)[1])
+
+  caname-2 = upper(split(".",var.device_settings.identity)[2])
 }
