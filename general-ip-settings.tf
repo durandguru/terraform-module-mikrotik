@@ -34,6 +34,6 @@ resource "routeros_ip_service" "www-ssl" {
   numbers     = "www-ssl"
   port        = "443"
   disabled    = false
-  tls_version = "only-v1.2"
+  tls_version = "only-1.2"
   certificate = routeros_system_certificate.scep_client.name
 }
