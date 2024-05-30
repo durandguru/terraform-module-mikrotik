@@ -60,7 +60,7 @@ variable "cert_settings" {
     scep_url     = string
   })
   default = {
-    type         = "root"
+    type         = ""
     country      = "NL"
     state        = ""
     locality     = ""
