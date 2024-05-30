@@ -22,4 +22,6 @@ locals {
   dynamic_ports = keys({
     for k, v in var.device_network_settings.dynamicports : k => v
   if v.type == "admit-all" && var.device_settings.device_type == "sector-ap" })
+
+  ip = trim(trim("${var.device_settings.hosturl}", ":443"), "https://")
 }
