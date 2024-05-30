@@ -30,3 +30,22 @@ resource "routeros_system_certificate_scep_server" "scep-365-days" {
 
   depends_on = [routeros_system_certificate.root_ca]
 }
+
+# add name=sw06 common-name=sw06.durand.es country=NL state=UT locality=Utrecht organization="Durand Guru" unit=Events subject-alt-name=DNS:sw06.durand.es,IP:172.22.5.16
+
+resource "routeros_system_certificate" "scep_client" {
+  name             = var.device_settings.identity
+  common_name      = var.device_settings.identity
+  subject_alt_name = "DNS:${var.device_settings.identity},IP:"
+  key_usage        = ["digital-signature", "key-agreement", "tls-client"]
+  country          = "NL"
+  locality         = "Apeldoorn"
+  organization     = "Durand Guru"
+  state            = "Gelderland"
+  unit             = "Omnisport"
+  key_size         = "4096"
+
+  sign_via_scep {
+    scep_url = "http://172.22.5.1/scep/90"
+  }
+}

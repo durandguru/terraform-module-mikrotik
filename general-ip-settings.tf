@@ -27,5 +27,5 @@ resource "routeros_ip_service" "telnet" {
 resource "routeros_ip_service" "www" {
   numbers  = "www"
   port     = "80"
-  disabled = "true"
+  disabled = "false"
 }
