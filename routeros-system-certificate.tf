@@ -34,21 +34,21 @@ resource "routeros_system_certificate" "root_ca" {
 #   depends_on = [routeros_system_certificate.root_ca[0]]
 # }
 
-resource "routeros_system_certificate" "scep_client" {
-  name             = var.device_settings.identity
-  common_name      = var.device_settings.identity
-  subject_alt_name = "DNS:${var.device_settings.identity},IP:${local.ip}"
-  key_usage        = ["digital-signature", "key-agreement", "tls-client"]
-  country          = var.cert_settings.country
-  state            = var.cert_settings.state
-  locality         = var.cert_settings.locality
-  organization     = var.cert_settings.organization
-  unit             = var.cert_settings.unit
-  key_size         = var.cert_settings.key_size
+# resource "routeros_system_certificate" "scep_client" {
+#   name             = var.device_settings.identity
+#   common_name      = var.device_settings.identity
+#   subject_alt_name = "DNS:${var.device_settings.identity},IP:${local.ip}"
+#   key_usage        = ["digital-signature", "key-agreement", "tls-client"]
+#   country          = var.cert_settings.country
+#   state            = var.cert_settings.state
+#   locality         = var.cert_settings.locality
+#   organization     = var.cert_settings.organization
+#   unit             = var.cert_settings.unit
+#   key_size         = var.cert_settings.key_size
 
-  sign_via_scep {
-    scep_url = var.cert_settings.scep_url
-  }
+#   sign_via_scep {
+#     scep_url = var.cert_settings.scep_url
+#   }
 
-  depends_on = [routeros_system_certificate.root_ca]
-}
+#   depends_on = [routeros_system_certificate.root_ca]
+# }
