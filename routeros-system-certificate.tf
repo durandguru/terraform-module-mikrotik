@@ -16,23 +16,23 @@ resource "routeros_system_certificate" "root_ca" {
   }
 }
 
-resource "routeros_system_certificate_scep_server" "scep-90-days" {
-  count      = var.cert_settings.root == true ? 1 : 0
-  ca_cert    = routeros_system_certificate.root_ca.name
-  path       = "/scep/90"
-  days_valid = 90
+# resource "routeros_system_certificate_scep_server" "scep-90-days" {
+#   count      = var.cert_settings.root == true ? 1 : 0
+#   ca_cert    = routeros_system_certificate.root_ca.name
+#   path       = "/scep/90"
+#   days_valid = 90
 
-  depends_on = [routeros_system_certificate.root_ca[0]]
-}
+#   depends_on = [routeros_system_certificate.root_ca[0]]
+# }
 
-resource "routeros_system_certificate_scep_server" "scep-365-days" {
-  count      = var.cert_settings.root == true ? 1 : 0
-  ca_cert    = routeros_system_certificate.root_ca.name
-  path       = "/scep/365"
-  days_valid = 365
+# resource "routeros_system_certificate_scep_server" "scep-365-days" {
+#   count      = var.cert_settings.root == true ? 1 : 0
+#   ca_cert    = routeros_system_certificate.root_ca.name
+#   path       = "/scep/365"
+#   days_valid = 365
 
-  depends_on = [routeros_system_certificate.root_ca[0]]
-}
+#   depends_on = [routeros_system_certificate.root_ca[0]]
+# }
 
 resource "routeros_system_certificate" "scep_client" {
   name             = var.device_settings.identity
