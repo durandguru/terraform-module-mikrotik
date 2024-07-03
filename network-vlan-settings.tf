@@ -9,7 +9,7 @@ resource "routeros_interface_bridge_vlan" "vlan" {
     keys({ for k, v in local.hybrid_ports_untagged : k => v if v.vlan != each.value.vlan_id }),
     local.dynamic_ports
   ))
-  vlan_ids = each.value.vlan_id
+  vlan_ids = [each.value.vlan_id]
 }
 
 resource "routeros_interface_vlan" "vlan" {

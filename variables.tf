@@ -1,7 +1,7 @@
 variable "shared_settings" {
   type = object({
-    dns_server         = string
-    dns_forwarders     = string
+    dns_server         = list(string)
+    dns_forwarders     = list(string)
     dns_domain         = string
     provider_version   = string
     default_gateway_v4 = string
@@ -12,8 +12,8 @@ variable "shared_settings" {
     ntp_servers        = string
   })
   default = {
-    dns_server         = ""
-    dns_forwarders     = ""
+    dns_server         = [""]
+    dns_forwarders     = [""]
     dns_domain         = ""
     provider_version   = ""
     default_gateway_v4 = ""
