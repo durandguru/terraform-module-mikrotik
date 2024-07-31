@@ -7,9 +7,9 @@ resource "routeros_ip_service" "api" {
 resource "routeros_ip_service" "api-ssl" {
   numbers     = "api-ssl"
   port        = "8729"
-  disabled    = "true"
-  certificate = "none"
-  tls_version = "any"
+  disabled    = false
+  tls_version = "only-1.2"
+  certificate = routeros_system_certificate.scep_client.name
 }
 
 resource "routeros_ip_service" "ftp" {

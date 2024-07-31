@@ -10,6 +10,8 @@ variable "shared_settings" {
     snmp_location      = string
     snmp_contact       = string
     ntp_servers        = string
+    syslog_server      = string
+    mktxp_password     = string
   })
   default = {
     dns_server         = [""]
@@ -22,6 +24,8 @@ variable "shared_settings" {
     snmp_location      = ""
     snmp_contact       = ""
     ntp_servers        = ""
+    syslog_server      = ""
+    mktxp_password     = ""
   }
 }
 
