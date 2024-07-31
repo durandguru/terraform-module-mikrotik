@@ -3,7 +3,7 @@ resource "routeros_system_logging" "crticial" {
   prefix = ":Critical"
   topics = ["critical"]
 
-  depends_on = [ routeros_system_logging_action.syslog ]
+  depends_on = [routeros_system_logging_action.syslog]
 }
 
 resource "routeros_system_logging" "error" {
@@ -11,7 +11,7 @@ resource "routeros_system_logging" "error" {
   prefix = ":Error"
   topics = ["error"]
 
-  depends_on = [ routeros_system_logging_action.syslog ]
+  depends_on = [routeros_system_logging_action.syslog]
 }
 
 resource "routeros_system_logging" "warning" {
@@ -19,7 +19,7 @@ resource "routeros_system_logging" "warning" {
   prefix = ":Warning"
   topics = ["warning"]
 
-  depends_on = [ routeros_system_logging_action.syslog ]
+  depends_on = [routeros_system_logging_action.syslog]
 }
 
 resource "routeros_system_logging" "info" {
@@ -27,5 +27,5 @@ resource "routeros_system_logging" "info" {
   prefix = ":Info"
   topics = ["info"]
 
-  depends_on = [ routeros_system_logging_action.syslog ]
+  depends_on = [routeros_system_logging_action.syslog]
 }
