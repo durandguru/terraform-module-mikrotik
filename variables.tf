@@ -33,6 +33,7 @@ variable "device_settings" {
   type = object({
     identity        = string
     hosturl         = string
+    ip              = string
     username        = string
     device_type     = string
     vlan_mode       = string
@@ -44,6 +45,7 @@ variable "device_settings" {
   default = {
     identity        = ""
     hosturl         = ""
+    ip              = ""
     username        = ""
     device_type     = ""
     vlan_mode       = ""
