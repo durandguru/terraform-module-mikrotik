@@ -25,7 +25,7 @@ resource "routeros_system_logging" "warning" {
 resource "routeros_system_logging" "info" {
   action = routeros_system_logging_action.syslog.name
   prefix = ":Info"
-  topics = ["info"]
+  topics = ["info", "!wireguard"]
 
   depends_on = [routeros_system_logging_action.syslog]
 }
