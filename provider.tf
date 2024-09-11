@@ -2,6 +2,7 @@ provider "routeros" {
   hosturl  = var.device_settings.hosturl
   username = var.device_settings.username
   password = var.network_password
+  insecure = var.insecure
 }
 
 terraform {

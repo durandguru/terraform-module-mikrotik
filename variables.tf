@@ -88,3 +88,7 @@ variable "environment_network_settings" {
 variable "network_password" {
   default = ""
 }
+
+variable "insecure" {
+  default = ""
+}
