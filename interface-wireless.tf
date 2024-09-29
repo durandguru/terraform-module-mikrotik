@@ -20,6 +20,8 @@ resource "routeros_interface_wireless" "wlan-2" {
   wireless_protocol  = "802.11"
   wps_mode           = "disabled"
   security_profile   = each.value.wireless_name
+
+  depends_on = [routeros_interface_wireless_security_profiles.security_profiles]
 }
 
 resource "routeros_interface_wireless" "wlan-5" {
@@ -41,4 +43,6 @@ resource "routeros_interface_wireless" "wlan-5" {
   wireless_protocol  = "802.11"
   wps_mode           = "disabled"
   security_profile   = each.value.wireless_name
+
+  depends_on = [routeros_interface_wireless_security_profiles.security_profiles]
 }
