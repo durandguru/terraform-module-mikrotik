@@ -10,9 +10,13 @@ updates:
       day: "wednesday"
       interval: "weekly"
       time: "04:47"
+    assignees:
+      - "durandguru"
   - package-ecosystem: "terraform"
     directory: "/"
     schedule:
       day: "thursday"
       interval: "weekly"
       time: "05:47"
+    assignees:
+      - "durandguru"
