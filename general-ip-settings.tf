@@ -9,7 +9,6 @@ resource "routeros_ip_service" "api-ssl" {
   port        = "8729"
   disabled    = false
   tls_version = "only-1.2"
-  certificate = routeros_system_certificate.scep_client.name
 }
 
 resource "routeros_ip_service" "ftp" {
@@ -35,5 +34,4 @@ resource "routeros_ip_service" "www-ssl" {
   port        = "443"
   disabled    = false
   tls_version = "only-1.2"
-  certificate = routeros_system_certificate.scep_client.name
 }
