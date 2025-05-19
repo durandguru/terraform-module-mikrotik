@@ -29,7 +29,7 @@ resource "routeros_ip_dns_record" "dns-record-fwd" {
   for_each = {
     for k, v in var.environment_network_settings.dns-records : k => v
   if var.device_settings.device_type == "router" && v.dns_type == "FWD" }
-  forward-to = each.value.dns_forward_to
+  forward_to = each.value.dns_forward_to
   type       = each.value.dns_type
   regexp     = each.value.dns_regexp
 }
