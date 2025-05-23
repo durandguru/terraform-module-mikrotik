@@ -7,7 +7,7 @@ resource "routeros_ip_service" "api" {
 resource "routeros_ip_service" "api-ssl" {
   numbers     = "api-ssl"
   port        = "8729"
-  disabled = "true"
+  disabled    = "true"
   tls_version = "only-1.2"
 }
 
