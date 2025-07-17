@@ -102,7 +102,7 @@ resource "routeros_ip_dns_record" "vlan-dns-rt-a-record" {
   if v.vlan_if && var.device_settings.device_type == "router" }
   type    = "A"
   address = cidrhost(each.value.vlan_address_v4, 1)
-  name    = each.value.vlan_mgmt ? var.device_settings.identity : "rt-${each.value.vlan_id}.${var.shared_settings.dns_domain}"
+  name    = "rt-${each.value.vlan_id}.${var.shared_settings.dns_domain}"
 }
 
 resource "routeros_ip_dns_record" "vlan-dns-rt-aaaa-record" {
@@ -111,5 +111,5 @@ resource "routeros_ip_dns_record" "vlan-dns-rt-aaaa-record" {
   if v.vlan_if && v.vlan_ipv6 && var.device_settings.device_type == "router" }
   type    = "AAAA"
   address = cidrhost(each.value.vlan_address_v6, 1)
-  name    = each.value.vlan_mgmt ? var.device_settings.identity : "rt-${each.value.vlan_id}.${var.shared_settings.dns_domain}"
+  name    = "rt-${each.value.vlan_id}.${var.shared_settings.dns_domain}"
 }
