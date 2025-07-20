@@ -6,5 +6,6 @@ resource "routeros_interface_bridge_port" "bridgeport" {
   ingress_filtering = var.device_settings.vlan_mode == "bridge" ? true : false
   frame_types       = var.device_settings.vlan_mode == "bridge" ? each.value.type : "admit-all"
   hw                = true
-  fast_leave        = var.device_settings.vlan_mode == "bridge" ? true : false
+  # fast_leave        = var.device_settings.vlan_mode == "bridge" ? true : false
+  fast_leave        = false
 }
