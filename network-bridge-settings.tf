@@ -6,7 +6,9 @@ resource "routeros_interface_bridge" "bridge" {
   igmp_snooping     = true
   igmp_version      = "3"
   mld_version       = "2"
-  multicast_router  = var.device_settings.device_type == "router" ? "permanent" : "temporary-query"
-  multicast_querier = var.device_settings.device_type == "router" ? true : false
+  # multicast_router  = var.device_settings.device_type == "router" ? "permanent" : "temporary-query"
+  # multicast_querier = var.device_settings.device_type == "router" ? true : false
+  multicast_router  = "temporary-query"
+  multicast_querier = false
   vlan_filtering    = var.device_settings.vlan_mode == "bridge" ? true : false
 }
